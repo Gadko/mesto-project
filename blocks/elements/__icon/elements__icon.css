@@ -1,0 +1,14 @@
+.elements__icon {
+    background-image: url(../../../images/serdce-wite.svg);
+    width: 22px;
+    height: 19px;
+}
+
+.elements__icon:hover {
+    opacity: .5;
+}
+
+.elements__icon:active {
+    opacity: 1;
+    background-image: url(../../../images/serdce-black.svg);
+}

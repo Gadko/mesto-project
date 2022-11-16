@@ -1,0 +1,14 @@
+.header {
+    margin-top: 45px;
+    height: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+@media screen and (max-width: 320px) {
+    .header {
+        height: 56px;
+        margin-top: 29px;
+    }
+}

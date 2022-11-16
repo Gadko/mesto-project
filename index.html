@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="alternate" hreflang="Ru" href="#" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" alt="Логотип" src="./images/Logo.svg" />
+      <div class="header__line"></div>
+    </header>
+    <main>
+      <!--Модальное окно-->
+      <div class="popup popup_opened">
+        <div class="popup__table">
+          <div class="popup__cell">
+            <div class="popup__container">
+              <img
+                alt="Закрыть"
+                class="popup__close"
+                src="./images/Close-Icon.svg"
+              />
+              <h2 class="popup__title">Редактировать профиль</h2>
+              <input
+                type="text"
+                name="login"
+                placeholder="login"
+                value="Жак-Ив Кусто"
+                class="popup__field-name"
+              />
+              <input
+                type="text"
+                name="description"
+                placeholder="description"
+                value="Исследователь океана"
+                class="popup__field-discription"
+              />
+              <button class="popup__submit-button">
+                <p class="popup__button-text">Сохранить</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--конец модального окна-->
+      <!--Профиль-->
+      <section class="profile">
+        <img class="profile__img" alt="Аватарка" src="./images/image.png" />
+        <div class="profile__container">
+          <p class="profile__name">Жак-Ив Кусто</p>
+          <p class="profile__description">Исследователь океана</p>
+          <img
+            class="profile__icon"
+            alt="Карандашь"
+            src="./images/Edit-Button.svg"
+          />
+        </div>
+        <div class="profile__button"></div>
+      </section>
+      <!--Карточки-->
+      <section class="elements">
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1088404-unsplash-1.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Карачаевск</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1088404-unsplash.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Гора Эльбрус</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1404681-unsplash-1.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Домбай</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1404681-unsplash.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Гора Эльбрус</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1556355-unsplash-1.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Домбай</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+        <div class="elements__element">
+          <img
+            class="elements__img"
+            alt="Картинка карточки"
+            src="./images/kirill-pershin-1556355-unsplash.png"
+          />
+          <div class="elements__conteiner">
+            <p class="elements__name">Карачаево-Черкесия</p>
+            <div class="elements__icon"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </body>
+</html>

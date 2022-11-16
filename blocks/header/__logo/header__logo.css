@@ -1,0 +1,19 @@
+.header__logo {
+    align-items: start;
+    justify-items: start;
+    max-width: 142px;
+    min-width: 103.7px;
+}
+@media screen and (max-width: 880px) {
+    .header__logo {
+        margin-left: 8.44%;
+    }
+    
+}
+
+@media screen and (max-width: 320px) {
+    .header__logo {
+        width: 103.7px;
+    }
+    
+}

@@ -1,0 +1,26 @@
+.profile {
+    margin-top: 40px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 120px auto 150px;
+    grid-template-areas: 
+    "img info button";
+}
+
+@media screen and (max-width: 320px) {
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+}
+
+@media screen and (max-width: 629px) {
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+}

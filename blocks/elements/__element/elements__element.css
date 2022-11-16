@@ -1,0 +1,13 @@
+.elements__element {
+    border-radius: 10px;
+    background-color: #fff;
+    height: 361px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 282px auto;
+    grid-template-areas: 
+    "img"
+    "conteiner";
+    justify-items: center;
+    align-items: center;
+}

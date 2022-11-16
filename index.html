@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,122 +11,94 @@
   <body class="page">
     <header class="header">
       <img class="header__logo" alt="Логотип" src="./images/Logo.svg" />
-      <div class="header__line"></div>
     </header>
     <main>
-      <!--Модальное окно-->
-      <div class="popup popup_opened">
-        <div class="popup__table">
-          <div class="popup__cell">
-            <div class="popup__container">
-              <img
-                alt="Закрыть"
-                class="popup__close"
-                src="./images/Close-Icon.svg"
-              />
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <input
-                type="text"
-                name="login"
-                placeholder="login"
-                value="Жак-Ив Кусто"
-                class="popup__field-name"
-              />
-              <input
-                type="text"
-                name="description"
-                placeholder="description"
-                value="Исследователь океана"
-                class="popup__field-discription"
-              />
-              <button class="popup__submit-button">
-                <p class="popup__button-text">Сохранить</p>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--конец модального окна-->
       <!--Профиль-->
       <section class="profile">
         <img class="profile__img" alt="Аватарка" src="./images/image.png" />
         <div class="profile__container">
-          <p class="profile__name">Жак-Ив Кусто</p>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__description">Исследователь океана</p>
-          <img
-            class="profile__icon"
-            alt="Карандашь"
-            src="./images/Edit-Button.svg"
-          />
+          <button class="button" type="button" name="button-edit">
+            <img
+              class="profile__icon"
+              alt="Карандашь"
+              src="./images/Edit-Button.svg"
+            />
+          </button>
         </div>
-        <div class="profile__button"></div>
+        <button
+          class="button button_profil"
+          type="button"
+          name="button-edit"
+        ></button>
       </section>
       <!--Карточки-->
       <section class="elements">
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1088404-unsplash-1.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Карачаевск</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Карачаевск</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1088404-unsplash.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Гора Эльбрус</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1404681-unsplash-1.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Домбай</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Домбай</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1404681-unsplash.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Гора Эльбрус</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1556355-unsplash-1.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Домбай</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Домбай</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
-        <div class="elements__element">
+        <div class="element">
           <img
-            class="elements__img"
+            class="element__img"
             alt="Картинка карточки"
             src="./images/kirill-pershin-1556355-unsplash.png"
           />
-          <div class="elements__conteiner">
-            <p class="elements__name">Карачаево-Черкесия</p>
-            <div class="elements__icon"></div>
+          <div class="element__container">
+            <h2 class="element__name">Карачаево-Черкесия</h2>
+            <button class="button_icon button"></button>
           </div>
         </div>
       </section>
@@ -134,5 +106,40 @@
     <footer class="footer">
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
+    <!--Модальное окно-->
+    <div class="popup popup_opened">
+      <div class="popup__container">
+        <button class="button" type="button" name="button-close">
+          <img
+            alt="Закрыть"
+            class="popup__close"
+            src="./images/Close-Icon.svg"
+          />
+        </button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="popup-form" method="get">
+          <input
+            type="text"
+            name="login"
+            placeholder="Имя"
+            value="Жак-Ив Кусто"
+            class="popup__field popup__field_margin"
+            id="name"
+          />
+          <input
+            type="text"
+            name="description"
+            placeholder="Описание"
+            value="Исследователь океана"
+            class="popup__field"
+            id="description"
+          />
+          <button class="popup__submit-button">
+            <b class="popup__button-text">Сохранить</b>
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--конец модального окна-->
   </body>
 </html>

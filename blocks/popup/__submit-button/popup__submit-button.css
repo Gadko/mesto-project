@@ -4,6 +4,13 @@
     width: 358px;
     height: 50px;
     margin-top: 48px;
+    margin-bottom: 37px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+
 }
 .popup__submit-button:hover {
     opacity: 0.8;
@@ -13,5 +20,7 @@
     .popup__submit-button {
         width: 238px;
         height: 46px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

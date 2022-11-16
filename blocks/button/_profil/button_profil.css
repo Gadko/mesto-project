@@ -1,15 +1,16 @@
-.profile__button {
+.button_profil {
     background-image: url(../../../images/Add-Button.svg);
     width: 150px;
     height: 50px;
+    border-radius: 2px;
 }
 
-.profile__button:hover {
+.button_profil:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 320px) {
-    .profile__button {
+    .button_profil {
         background-image: url(../../../images/Add-Butto-big.svg);
         margin-top: 33px;
         width: 282px;

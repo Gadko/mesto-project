@@ -6,12 +6,6 @@
     opacity: 0.6;
 }
 
-@media screen and (max-width: 320px) {
-    .profile__icon {
-        width: 18px;
-    }
-    
-}
 
 @media screen and (max-width: 470px) {
     .profile__icon {

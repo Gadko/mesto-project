@@ -7,15 +7,6 @@
     "img info button";
 }
 
-@media screen and (max-width: 320px) {
-    .profile {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-}
-
 @media screen and (max-width: 629px) {
     .profile {
         display: flex;

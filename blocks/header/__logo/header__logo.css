@@ -3,6 +3,7 @@
     justify-items: start;
     max-width: 142px;
     min-width: 103.7px;
+    margin-bottom: 41px;
 }
 @media screen and (max-width: 880px) {
     .header__logo {
@@ -13,6 +14,7 @@
 
 @media screen and (max-width: 320px) {
     .header__logo {
+        margin-bottom: 31px;
         width: 103.7px;
     }
     

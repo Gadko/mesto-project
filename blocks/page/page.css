@@ -6,3 +6,10 @@
     min-width: 320px;
     margin: auto;
 }
+
+@media screen and (max-width: 900px) {
+    .page {
+        padding: 0 20px;
+    }
+    
+}

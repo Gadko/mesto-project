@@ -10,25 +10,32 @@
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" alt="Логотип" src="./images/Logo.svg" />
+      <img 
+        class="header__logo" 
+        alt="Логотип" 
+        src="./images/Logo.svg" 
+      />
     </header>
     <main>
       <!--Профиль-->
       <section class="profile">
-        <img class="profile__img" alt="Аватарка" src="./images/image.png" />
+        <img 
+          class="profile__img" 
+          alt="Аватарка" 
+          src="./images/image.png" 
+        />
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__description">Исследователь океана</p>
-          <button class="button" type="button" name="button-edit">
-            <img
-              class="profile__icon"
-              alt="Карандашь"
-              src="./images/Edit-Button.svg"
-            />
-          </button>
+          <button
+            class="button button__profile-icon"
+            type="button"
+            name="button-edit"
+            aria-label="close"
+          ></button>
         </div>
         <button
-          class="button button_profil"
+          class="button button__profil"
           type="button"
           name="button-edit"
         ></button>
@@ -43,7 +50,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Карачаевск</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
         <div class="element">
@@ -54,7 +61,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
         <div class="element">
@@ -65,7 +72,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Домбай</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
         <div class="element">
@@ -76,7 +83,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
         <div class="element">
@@ -87,7 +94,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Домбай</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
         <div class="element">
@@ -98,7 +105,7 @@
           />
           <div class="element__container">
             <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button class="button_icon button"></button>
+            <button class="button__element-icon button"></button>
           </div>
         </div>
       </section>
@@ -107,23 +114,25 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
     <!--Модальное окно-->
-    <div class="popup">
+    <div class="popup popup_opened">
       <div class="popup__container">
-        <button class="button" type="button" name="button-close">
-          <img
-            alt="Закрыть"
-            class="popup__close"
-            src="./images/Close-Icon.svg"
-          />
-        </button>
+        <button
+          class="button button__popup-close"
+          type="button"
+          name="button-close"
+        ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form" method="get">
+        <form 
+          class="popup__form" 
+          name="popup-form" 
+          method="get"
+        >
           <input
             type="text"
             name="login"
             placeholder="Имя"
             value="Жак-Ив Кусто"
-            class="popup__field popup__field_margin"
+            class="popup__field"
             id="name"
           />
           <input
@@ -134,9 +143,7 @@
             class="popup__field"
             id="description"
           />
-          <button class="popup__submit-button">
-            <b class="popup__button-text">Сохранить</b>
-          </button>
+          <button class="popup__submit-button">Сохранить</button>
         </form>
       </div>
     </div>

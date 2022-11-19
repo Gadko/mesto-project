@@ -6,21 +6,25 @@
     margin-top: 48px;
     margin-bottom: 37px;
     cursor: pointer;
+    font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    color: #FFFFFF;
 
 }
 .popup__submit-button:hover {
     opacity: 0.8;
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 682px) {
     .popup__submit-button {
         width: 238px;
         height: 46px;
         font-size: 14px;
         line-height: 17px;
+        margin-top: 45px;
+        margin-bottom: 25px;
     }
 }

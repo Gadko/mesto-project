@@ -10,11 +10,12 @@
     grid-area: name;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 682px) {
     .profile__name {
+        width: 100%;
         font-size: 27px;
         line-height: 33px;
-        text-align: center;
+        text-align: end;
     }
     
 }

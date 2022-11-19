@@ -11,9 +11,11 @@
     margin-left: 30px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 682px) {
     .profile__container {
+        width: 282px;
         gap: 9px 10px;
+        margin: auto;
     }
     
 }

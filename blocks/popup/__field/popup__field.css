@@ -10,8 +10,16 @@
     
 }
 
+.popup__field:first-child {
+    margin-top: 40px;
+}
+
 @media screen and (max-width: 530px) {
     .popup__field {
         width: 238px;
+        margin-top: 14px;
+    }
+    .popup__field:first-child {
+        margin-top: 59px;
     }
 }

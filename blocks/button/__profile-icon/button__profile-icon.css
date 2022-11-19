@@ -1,0 +1,18 @@
+.button__profile-icon {
+    grid-area: icon;
+    background-image: url(../../../images/Edit-Button.svg);
+    width: 24px;
+    height: 24px;
+}
+
+.button__profile-icon:hover {
+    opacity: 0.6;
+}
+
+
+@media screen and (max-width: 470px) {
+    .button__profile-icon {
+        width: 18px;
+        height: 18px;
+    }
+}

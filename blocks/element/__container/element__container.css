@@ -6,3 +6,10 @@
     align-items: center;
     margin: 25px auto 31px;
 }
+
+@media screen and (max-width: 320px) {
+    .element__container {
+        margin: 27px auto 24px;
+    }
+    
+}

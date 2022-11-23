@@ -28,15 +28,15 @@
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__description">Исследователь океана</p>
           <button
-            class="button button__profile-icon"
             type="button"
+            class="button profile__button-edit"
             name="button-edit"
-            aria-label="close"
+            aria-label="Закрыть"
           ></button>
         </div>
         <button
-          class="button button__profil"
           type="button"
+          class="button profile__button"
           name="button-edit"
         ></button>
       </section>
@@ -50,7 +50,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Карачаевск</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
         <div class="element">
@@ -61,7 +64,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
         <div class="element">
@@ -72,7 +78,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Домбай</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
         <div class="element">
@@ -83,7 +92,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
         <div class="element">
@@ -94,7 +106,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Домбай</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
         <div class="element">
@@ -105,7 +120,10 @@
           />
           <div class="element__container">
             <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button class="button__element-icon button"></button>
+            <button
+              type="button" 
+              class="element__button button">
+            </button>
           </div>
         </div>
       </section>
@@ -114,11 +132,11 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
     <!--Модальное окно-->
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__container">
         <button
-          class="button button__popup-close"
           type="button"
+          class="button popup__close-button"
           name="button-close"
         ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -143,7 +161,11 @@
             class="popup__field"
             id="description"
           />
-          <button class="popup__submit-button">Сохранить</button>
+          <button
+            type="button" 
+            class="popup__submit-button"
+            >Сохранить
+          </button>
         </form>
       </div>
     </div>

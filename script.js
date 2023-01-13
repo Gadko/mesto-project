@@ -156,24 +156,3 @@ const initialCards = [
         elements.prepend(cardElement);
     });
 
-
-    // Открытие попапа с картинкой
-    /*
-const popupsImg = document.querySelector('.popup_type_img');
-const openPopupImg = document.querySelectorAll('.element__img');
-
-let imgSrc;
-openPopupImg.forEach((img) => {
-    img.addEventListener("click", (e) => {
-        imgSrc = e.target.style.backgroundImage;
-        imgSrc = imgSrc.substring(5, imgSrc.length-2);
-        popupsImg.classList.add('popup_opened');
-
-        document.querySelector('.popup__img').src = imgSrc;
-        const imgName = img.parentElement.querySelector('.element__name').textContent
-        document.querySelector('.popup__img-text').textContent = imgName;
-        currentPopup = 2;
-    });
-});
-
-*/

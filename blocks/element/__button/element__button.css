@@ -7,8 +7,3 @@
 .element__button:hover {
     opacity: .5;
 }
-
-.element__button:active {
-    opacity: 1;
-    background-image: url(../../../images/serdce-black.svg);
-}

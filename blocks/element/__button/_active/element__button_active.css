@@ -1,0 +1,5 @@
+.element__button_active {
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../../images/serdce-black.svg);
+}

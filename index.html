@@ -29,119 +29,38 @@
           <p class="profile__description">Исследователь океана</p>
           <button
             type="button"
-            class="button profile__button-edit"
+            class="button profile__button-edit popup-open"
             name="button-edit"
             aria-label="Закрыть"
           ></button>
         </div>
         <button
           type="button"
-          class="button profile__button"
-          name="button-edit"
+          class="button profile__button popup-open"
+          name="button-profile"
         ></button>
       </section>
       <!--Карточки-->
       <section class="elements">
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1088404-unsplash-1.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Карачаевск</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1088404-unsplash.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1404681-unsplash-1.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Домбай</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1404681-unsplash.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1556355-unsplash-1.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Домбай</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            class="element__img"
-            alt="Картинка карточки"
-            src="./images/kirill-pershin-1556355-unsplash.png"
-          />
-          <div class="element__container">
-            <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button
-              type="button" 
-              class="element__button button">
-            </button>
-          </div>
-        </div>
+        
       </section>
     </main>
     <footer class="footer">
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
     <!--Модальное окно-->
-    <div class="popup">
+    <div 
+      id="popup-edit"
+      class="popup popup_type_edit">
       <div class="popup__container">
         <button
           type="button"
-          class="button popup__close-button"
+          class="button popup__close-button popup__close-button_type_edit"
           name="button-close"
         ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form 
-          class="popup__form" 
+          class="popup__form popup__form_type_edit" 
           name="popup-form" 
           method="get"
         >
@@ -150,7 +69,7 @@
             name="login"
             placeholder="Имя"
             value="Жак-Ив Кусто"
-            class="popup__field"
+            class="popup__field popup__field_type_name"
             id="name"
           />
           <input
@@ -158,17 +77,103 @@
             name="description"
             placeholder="Описание"
             value="Исследователь океана"
-            class="popup__field"
+            class="popup__field popup__field_type_description"
             id="description"
           />
           <button
             type="submit" 
-            class="popup__submit-button"
+            class="popup__submit-button popup__submit-button_type_edit"
             >Сохранить
           </button>
         </form>
       </div>
     </div>
     <!--конец модального окна-->
+    <div 
+      id="popup-profile"
+      class="popup popup_type_profile"
+      data-for-popup-target = "popup-profile">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="button popup__close-button popup__close-button_type_button"
+          name="button-close"
+        ></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form 
+          class="popup__form popup__form_type_profile" 
+          name="popup-form" 
+          method="get"
+        >
+          <input
+            type="text"
+            name="login"
+            placeholder="Название"
+            value=""
+            class="popup__field popup__field_type_title"
+            id="name"
+          />
+          <input
+            type="link"
+            name="link"
+            placeholder="Ссылка на картинку"
+            value=""
+            class="popup__field popup__field_type_link"
+            id="description"
+          />
+          <button
+            type="submit" 
+            class="popup__submit-button popup__submit-button_type_profile"
+            >Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--Модальное окно с картинкой-->
+    <div 
+      id="popup-img"
+      class="popup popup_type_img "
+      data-for-popup-target = "popup-profile">
+      <div class="popup__container-image">
+        <button
+          type="button"
+          class="button popup__close-button popup__close-button_type_button"
+          name="button-close"
+        ></button>
+        <figure class="popup__figure">
+          <img 
+            class="popup__img"
+            alt="картинка" 
+            src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg">
+          <figcaption class="popup__img-text">Джек Рассел</figcaption>
+        </figure>
+      </div>
+    </div>
+
+
+    <template id="card-template">
+      <div class="element">
+        <button 
+          type="button"
+          class="element__trash button">
+        </button>
+        <button
+          type="button"
+          name="button-img"
+          id="element__img"
+          class="element__img button popup-open"
+        >
+        </button>
+        <div class="element__container">
+          <h2 class="element__name"></h2>
+          <button
+            type="button" 
+            class="element__button button">
+          </button>
+        </div>
+      </div>
+    </template>
+
+    <script src="./script.js"></script>
   </body>
 </html>

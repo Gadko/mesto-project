@@ -9,25 +9,26 @@ const popupButtonClose = document.querySelector('.popup__close-button_type_butto
 
 // Функция открытия попапа 
 
-let popups = document.querySelectorAll('.popup');
-let openPopupButtons = document.querySelectorAll('.popup-open');
-let closePopupButton = document.querySelectorAll('.popup__close-button');
+const popups = document.querySelectorAll('.popup');
+const openPopupButtons = document.querySelectorAll('.popup-open');
+const closePopupButton = document.querySelectorAll('.popup__close-button');
 const popupsMap = { 
     'button-edit': 0, 
     'button-profile': 1,
-    'button-close': 2};
-let currentPopup
+    'button-close': 2
+};
+let currentPopup;
 
-openPopupButtons.forEach(function (button){
+openPopupButtons.forEach(function (button) {
     button.addEventListener('click', function(e) {
         e.preventDefault();
         if(popupsMap[button.name] === undefined) {
-            throw new Error("Нет идентификатора для кнопки")
-            }
+            throw new Error("Нет идентификатора для кнопки");
+        }
         currentPopup = popupsMap[button.name];
         if(popups[currentPopup] === undefined) {
-            throw new Error("Тут нет попапа для кнопки")
-            }
+            throw new Error("Тут нет попапа для кнопки");
+        }
         popups[currentPopup].classList.add('popup_opened');
     })
 });
@@ -36,8 +37,8 @@ closePopupButton.forEach(function (button){
     button.addEventListener('click', function(e) {
         e.preventDefault();
         if(popups[currentPopup] === undefined) {
-            throw new Error("Попап не открыт")
-            }
+            throw new Error("Попап не открыт");
+        }
         popups[currentPopup].classList.remove('popup_opened');
     })
 });
@@ -50,10 +51,10 @@ closePopupButton.forEach(function (button){
 
 function changeData(event) {
     event.preventDefault();
-    let name = document.querySelector('.popup__field_type_name');
-    let description = document.querySelector('.popup__field_type_description');
-    let profileName = document.querySelector('.profile__name');
-    let profileDescription = document.querySelector('.profile__description');
+    const name = document.querySelector('.popup__field_type_name');
+    const description = document.querySelector('.popup__field_type_description');
+    const profileName = document.querySelector('.profile__name');
+    const profileDescription = document.querySelector('.profile__description');
     profileName.textContent = `${name.value}`;
     profileDescription.textContent = `${description.value}`;
     popupEditOpened.classList.remove('popup_opened');
@@ -61,7 +62,7 @@ function changeData(event) {
 popupForm.addEventListener('submit', changeData);
 
 /* Добавление карточки */
-const popupFormProfile = document.querySelector('.popup__form_type_profile')
+const popupFormProfile = document.querySelector('.popup__form_type_profile');
 const elements = document.querySelector('.elements');
 
 function createCard (linkValue, titleValue) {
@@ -74,7 +75,7 @@ function createCard (linkValue, titleValue) {
     cardElement.querySelector('.element__button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__button_active');
     });
-    cardElement.querySelector('.element__trash').addEventListener('click', (evt) =>{
+    cardElement.querySelector('.element__trash').addEventListener('click', (evt) => {
         evt.target.closest('.element').remove();
     });
 
@@ -83,14 +84,14 @@ function createCard (linkValue, titleValue) {
 }
 
 
-popupFormProfile.addEventListener('submit', function (evt){
+popupFormProfile.addEventListener('submit', function (evt) {
     evt.preventDefault(); 
     title = document.querySelector('.popup__field_type_title');
     link = document.querySelector('.popup__field_type_link');
 
-    const card = createCard(link.value ,title.value);
+    const card = createCard(link.value, title.value);
 
-    addPopup(card)
+    addPopup(card);
     elements.prepend(card);
 
     title.value='';

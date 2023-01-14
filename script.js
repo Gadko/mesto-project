@@ -1,60 +1,60 @@
 const profileButtonEdit = document.querySelector('.profile__button-edit');
-const popupEditOpened = document.querySelector('.popup_type_edit');
 const popupEditClose = document.querySelector('.popup__close-button_type_edit');
 const popupForm = document.querySelector('.popup__form_type_edit');
 
-const popupProfileOpened = document.querySelector('.popup_type_profile')
-const profileButton = document.querySelector('.profile__button')
-const popupButtonClose = document.querySelector('.popup__close-button_type_button')
+const popupEditOpened = document.querySelector('.popup_type_edit');
+const popupProfileOpened = document.querySelector('.popup_type_profile');
+
+const profileButton = document.querySelector('.profile__button');
+const popupButtonClose = document.querySelector('.popup__close-button_type_button');
+
+const closePopupImg = document.querySelector('.popup__close-button_type_img');
+const popupsImg = document.querySelector('.popup_type_img');
+
+const name = document.querySelector('.popup__field_type_name');
+const description = document.querySelector('.popup__field_type_description');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+
+const title = document.querySelector('.popup__field_type_title');
+const link = document.querySelector('.popup__field_type_link');
 
 // Функция открытия попапа 
-
-const popups = document.querySelectorAll('.popup');
 const openPopupButtons = document.querySelectorAll('.popup-open');
 const closePopupButton = document.querySelectorAll('.popup__close-button');
-const popupsMap = { 
-    'button-edit': 0, 
-    'button-profile': 1,
-    'button-close': 2
-};
-let currentPopup;
 
-openPopupButtons.forEach(function (button) {
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        if(popupsMap[button.name] === undefined) {
-            throw new Error("Нет идентификатора для кнопки");
-        }
-        currentPopup = popupsMap[button.name];
-        if(popups[currentPopup] === undefined) {
-            throw new Error("Тут нет попапа для кнопки");
-        }
-        popups[currentPopup].classList.add('popup_opened');
-    })
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+}
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+}
+
+profileButtonEdit.addEventListener('click', () => {
+    openPopup(popupEditOpened);
 });
-
-closePopupButton.forEach(function (button){
-    button.addEventListener('click', function(e) {
-        e.preventDefault();
-        if(popups[currentPopup] === undefined) {
-            throw new Error("Попап не открыт");
-        }
-        popups[currentPopup].classList.remove('popup_opened');
-    })
+popupEditClose.addEventListener('click', () => {
+    closePopup(popupEditOpened);
 });
 
 
+profileButton.addEventListener('click', () => {
+    openPopup(popupProfileOpened);
+});
+popupButtonClose.addEventListener('click', () => {
+    closePopup(popupProfileOpened);
+});
 
+closePopupImg.addEventListener('click', () => {
+    closePopup(popupsImg);
+});
 
 
 /* Изменение описания */
 
 function changeData(event) {
     event.preventDefault();
-    const name = document.querySelector('.popup__field_type_name');
-    const description = document.querySelector('.popup__field_type_description');
-    const profileName = document.querySelector('.profile__name');
-    const profileDescription = document.querySelector('.profile__description');
     profileName.textContent = `${name.value}`;
     profileDescription.textContent = `${description.value}`;
     popupEditOpened.classList.remove('popup_opened');
@@ -68,9 +68,12 @@ const elements = document.querySelector('.elements');
 function createCard (linkValue, titleValue) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+    const openPopupImg = cardElement.querySelector('.element__img');
+    const popupImg = document.querySelector('.popup__img');
+    const imgName = document.querySelector('.popup__img-text');
 
     cardElement.querySelector('.element__name').textContent = titleValue;
-    cardElement.querySelector('.element__img').style.backgroundImage = `url(${linkValue})`;
+    openPopupImg.style.backgroundImage = `url(${linkValue})`;
 
     cardElement.querySelector('.element__button').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__button_active');
@@ -79,44 +82,29 @@ function createCard (linkValue, titleValue) {
         evt.target.closest('.element').remove();
     });
 
+    
+    openPopupImg.addEventListener("click", () => {
+    
+        popupImg.src = linkValue;
+        popupImg.alt = titleValue;
+        imgName.textContent = titleValue;
+        openPopup(popupsImg);
+    });
 
     return(cardElement);
 }
 
-
 popupFormProfile.addEventListener('submit', function (evt) {
     evt.preventDefault(); 
-    title = document.querySelector('.popup__field_type_title');
-    link = document.querySelector('.popup__field_type_link');
 
     const card = createCard(link.value, title.value);
 
-    addPopup(card);
     elements.prepend(card);
 
-    title.value='';
-    link.value='';
+    evt.target.reset();
     popupProfileOpened.classList.remove('popup_opened');
     
 });
-
-function addPopup(cardElement){
-    const openPopupImg = cardElement.querySelector('.element__img');
-    const popupsImg = document.querySelector('.popup_type_img');
-
-    let imgSrc;
-
-    openPopupImg.addEventListener("click", (e) => {
-        imgSrc = e.target.style.backgroundImage;
-        imgSrc = imgSrc.substring(5, imgSrc.length-2);
-        popupsImg.classList.add('popup_opened');
-
-        document.querySelector('.popup__img').src = imgSrc;
-        const imgName = cardElement.querySelector('.element__name').textContent
-        document.querySelector('.popup__img-text').textContent = imgName;
-        currentPopup = 2;
-    });
-}
 
 // Карточки через массив
 const initialCards = [
@@ -152,8 +140,7 @@ const initialCards = [
 
     initialCards.forEach((element) => {
 
-        const cardElement = createCard(element.link, element.name)
-        addPopup(cardElement);
+        const cardElement = createCard(element.link, element.name);
         elements.prepend(cardElement);
     });
 

@@ -32,11 +32,15 @@ function openPopup(popup) {
 }
 
 profileButtonEdit.addEventListener('click', () => {
+    name.value = profileName.textContent;
+    description.value = profileDescription.textContent;
     openPopup(popupEditOpened);
 });
 popupEditClose.addEventListener('click', () => {
     closePopup(popupEditOpened);
 });
+
+
 
 
 profileButton.addEventListener('click', () => {
@@ -57,7 +61,7 @@ function changeData(event) {
     event.preventDefault();
     profileName.textContent = `${name.value}`;
     profileDescription.textContent = `${description.value}`;
-    popupEditOpened.classList.remove('popup_opened');
+    closePopup(popupEditOpened);
 }
 popupForm.addEventListener('submit', changeData);
 
@@ -102,7 +106,7 @@ popupFormProfile.addEventListener('submit', function (evt) {
     elements.prepend(card);
 
     evt.target.reset();
-    popupProfileOpened.classList.remove('popup_opened');
+    closePopup(popupProfileOpened);
     
 });
 

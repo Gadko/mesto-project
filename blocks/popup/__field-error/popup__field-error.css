@@ -1,0 +1,16 @@
+.popup__field-error {
+    margin-top: 5px;
+    display: none;
+    width: 384px;
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align:left;
+}
+
+@media screen and (max-width: 530px) {
+    .popup__field-error {
+        width: 264px;
+    }
+}

@@ -1,13 +1,11 @@
 .profile__img {
-    grid-area: img;
+    grid-column: 1/1;
+    grid-row: 1/1;
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    background-image: url(../../../images/image.png);
 }
 
-@media screen and (max-width: 682px) {
-    .profile__img {
-        margin-bottom: 26px;
-    }
-    
-}
+
+

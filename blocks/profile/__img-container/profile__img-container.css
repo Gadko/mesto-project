@@ -1,0 +1,23 @@
+.profile__img-container {
+    position: relative;
+    grid-area: img;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    cursor: pointer;
+}
+
+.profile__img-container:hover .profile__overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.profile__img-container:hover .profile__img-pencil {
+    display: block;
+}
+
+
+@media screen and (max-width: 682px) {
+    .profile__img-container {
+        margin-bottom: 26px;
+    }
+    
+}

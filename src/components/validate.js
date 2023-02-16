@@ -46,14 +46,19 @@ const isValid = (validationList, formElement, inputElement) => {
 }
 
 
-const setEventListeners = (validationList ,fEl) => {
-    const inputList = Array.from(fEl.querySelectorAll(validationList.inputSelector));
-    const buttonEl = fEl.querySelector(validationList.submitButtonSelector);
+const setEventListeners = (validationList ,formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationList.inputSelector));
+    const buttonEl = formElement.querySelector(validationList.submitButtonSelector);
 
+    formElement.addEventListener('reset', () => {
+        setTimeout(() => {
+          toggleButtonState(validationList, inputList, buttonEl);
+        }, 0); 
+      });
 
     inputList.forEach((inputEl) => {
         inputEl.addEventListener('input', (e) => {
-            isValid(validationList, fEl, inputEl)
+            isValid(validationList, formElement, inputEl)
             toggleButtonState(validationList, inputList, buttonEl);
         });
     });

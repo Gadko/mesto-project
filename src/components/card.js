@@ -1,30 +1,11 @@
 import {
-    popupFormProfile,
+    imgName,
+    popupImg,
     elements,
-    popupForm,
-    profileName,
-    profileDescription,
-    name,
-    description,
-    popupEditOpened,
-    popupProfileOpened,
-    link,
-    title,
     popupsImg
-} from './utils.js';
+} from './constants.js';
 
-import {closePopup, openPopup} from './modal.js'
-
-// изменение описания 
- 
-export function changeData(event) {
-    event.preventDefault();
-    profileName.textContent = `${name.value}`;
-    profileDescription.textContent = `${description.value}`;
-    closePopup(popupEditOpened);
-}
-
-
+import {openPopup} from './modal.js'
 
 
 // добавление карточек
@@ -33,8 +14,6 @@ export function createCard (linkValue, titleValue) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
     const openPopupImg = cardElement.querySelector('.element__img');
-    const popupImg = document.querySelector('.popup__img');
-    const imgName = document.querySelector('.popup__img-text');
 
     cardElement.querySelector('.element__name').textContent = titleValue;
     openPopupImg.style.backgroundImage = `url(${linkValue})`;

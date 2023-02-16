@@ -1,6 +1,5 @@
 import '../pages/index.css';
 
-
 import{
     profileButtonEdit,
     name,
@@ -13,23 +12,24 @@ import{
     popupImgOpened,
     popupEditClose,
     profileButton,
-    popupButtonClose,
+    profileCloseButton,
     closePopupImg,
     imgButton,
     imgCloseButton,
-    popupFormProfile,
+    cardForm,
     elements,
     link,
     title,
-    popupForm
-} from './components/utils.js';
+    profileForm
+} from './components/constants.js';
 
 import {
     closePopup,
     openPopup,
 } from './components/modal.js';
 
-import {createCard, changeData} from './components/card.js';
+import {changeData} from './components/utils.js';
+import {createCard} from './components/card.js';
 import { enableValidation } from './components/validate.js';
 
 
@@ -48,7 +48,7 @@ popupEditClose.addEventListener('click', () => {
 profileButton.addEventListener('click', () => {
     openPopup(popupProfileOpened);
 });
-popupButtonClose.addEventListener('click', () => {
+profileCloseButton.addEventListener('click', () => {
     closePopup(popupProfileOpened);
 });
 
@@ -70,7 +70,7 @@ imgCloseButton.addEventListener('click', () => {
 
 
 // Карточки
-popupFormProfile.addEventListener('submit', function (evt) {
+cardForm.addEventListener('submit', function (evt) {
     evt.preventDefault(); 
 
     const card = createCard(link.value, title.value);
@@ -85,7 +85,7 @@ popupFormProfile.addEventListener('submit', function (evt) {
 
 
 
-popupForm.addEventListener('submit', changeData);
+profileForm.addEventListener('submit', changeData);
 
 
 // валидация

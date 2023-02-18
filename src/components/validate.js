@@ -56,6 +56,8 @@ const setEventListeners = (validationList, formElement) => {
     validationList.submitButtonSelector
   );
 
+  toggleButtonState(validationList, inputList, buttonEl);
+
   formElement.addEventListener("reset", () => {
     setTimeout(() => {
       toggleButtonState(validationList, inputList, buttonEl);

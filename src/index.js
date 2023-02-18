@@ -1,4 +1,4 @@
-import "../pages/index.css";
+import "./pages/index.css";
 
 import {
   profileButtonEdit,
@@ -6,10 +6,10 @@ import {
   description,
   profileName,
   profileDescription,
-  popupEditOpened,
-  popupProfileOpened,
+  profilePopup,
+  cardPopup,
   popupsImg,
-  popupImgOpened,
+  imagePopup,
   popupEditClose,
   profileButton,
   profileCloseButton,
@@ -33,17 +33,17 @@ import { enableValidation } from "./components/validate.js";
 profileButtonEdit.addEventListener("click", () => {
   name.value = profileName.textContent;
   description.value = profileDescription.textContent;
-  openPopup(popupEditOpened);
+  openPopup(profilePopup);
 });
 popupEditClose.addEventListener("click", () => {
-  closePopup(popupEditOpened);
+  closePopup(profilePopup);
 });
 
 profileButton.addEventListener("click", () => {
-  openPopup(popupProfileOpened);
+  openPopup(cardPopup);
 });
 profileCloseButton.addEventListener("click", () => {
-  closePopup(popupProfileOpened);
+  closePopup(cardPopup);
 });
 
 closePopupImg.addEventListener("click", () => {
@@ -51,10 +51,10 @@ closePopupImg.addEventListener("click", () => {
 });
 
 imgButton.addEventListener("click", () => {
-  openPopup(popupImgOpened);
+  openPopup(imagePopup);
 });
 imgCloseButton.addEventListener("click", () => {
-  closePopup(popupImgOpened);
+  closePopup(imagePopup);
 });
 
 // Карточки
@@ -66,7 +66,7 @@ cardForm.addEventListener("submit", function (evt) {
   elements.prepend(card);
 
   evt.target.reset();
-  closePopup(popupProfileOpened);
+  closePopup(cardPopup);
 });
 
 profileForm.addEventListener("submit", changeData);

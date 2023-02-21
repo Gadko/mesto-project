@@ -21,11 +21,14 @@ import {
   link,
   title,
   profileForm,
+  addFormAvatar,
+  avatarPopup,
+  linkAvatar
 } from "./components/constants.js";
 
 import { closePopup, openPopup } from "./components/modal.js";
 
-import { changeData } from "./components/utils.js";
+import { changeData, changeAvatar } from "./components/utils.js";
 import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
 
@@ -70,6 +73,17 @@ cardForm.addEventListener("submit", function (evt) {
 });
 
 profileForm.addEventListener("submit", changeData);
+
+
+addFormAvatar.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  changeAvatar(linkAvatar.value);
+
+  evt.target.reset();
+  closePopup(avatarPopup);
+})
+
 
 // валидация
 enableValidation({

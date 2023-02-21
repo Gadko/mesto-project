@@ -4,6 +4,7 @@ const profileForm = document.querySelector(".popup__form_type_edit");
 
 const profilePopup = document.querySelector(".popup_type_edit");
 const cardPopup = document.querySelector(".popup_type_profile");
+const avatarPopup = document.querySelector('.popup_type_icon');
 const imagePopup = document.querySelector(".popup_type_icon");
 
 const profileButton = document.querySelector(".profile__button");
@@ -31,7 +32,12 @@ const elements = document.querySelector(".elements");
 const popupImg = document.querySelector(".popup__img");
 const imgName = document.querySelector(".popup__img-text");
 
+const addFormAvatar = document.querySelector('.popup__form_type_profile-avatar');
+const linkAvatar = document.querySelector('.popup__field_type_link-avatar');
+
 export {
+  linkAvatar,
+  addFormAvatar,
   imgName,
   popupImg,
   profileButtonEdit,
@@ -54,4 +60,5 @@ export {
   link,
   cardForm,
   elements,
+  avatarPopup
 };

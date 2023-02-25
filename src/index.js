@@ -31,6 +31,7 @@ import { closePopup, openPopup } from "./components/modal.js";
 import { changeData, changeAvatar } from "./components/utils.js";
 import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
+import { userInfo, Cards, postCard, putLikeElement, deleteLikeElement } from "./components/API";
 
 // Модальные окна
 profileButtonEdit.addEventListener("click", () => {
@@ -63,13 +64,16 @@ imgCloseButton.addEventListener("click", () => {
 // Карточки
 cardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  cardForm.querySelector('.popup__submit-button_type_profile').textContent = 'Сохранение...';
 
-  const card = createCard(link.value, title.value);
-
-  elements.prepend(card);
-
-  evt.target.reset();
-  closePopup(cardPopup);
+  postCard(title.value, link.value)
+    .then((res) => {
+      const card = createCard(res);
+      elements.prepend(card); 
+      cardForm.querySelector('.popup__submit-button_type_profile').textContent = 'Сохранить';
+      evt.target.reset();
+      closePopup(cardPopup);
+  });
 });
 
 profileForm.addEventListener("submit", changeData);
@@ -77,11 +81,15 @@ profileForm.addEventListener("submit", changeData);
 
 addFormAvatar.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  addFormAvatar.querySelector('.popup__submit-button_type_avatar').textContent = 'Сохранение...';
+  changeAvatar(linkAvatar.value)
+    .then(() => {
+      addFormAvatar.querySelector('.popup__submit-button_type_avatar').textContent = 'Сохранить';
+      evt.target.reset();
+      closePopup(avatarPopup);
+    });
 
-  changeAvatar(linkAvatar.value);
-
-  evt.target.reset();
-  closePopup(avatarPopup);
+  
 })
 
 
@@ -94,3 +102,21 @@ enableValidation({
   inputErrorClass: "popup__field_type_error",
   errorClass: "popup__field-error_active",
 });
+
+//связь с сервером 
+
+userInfo()
+  .then(data => {
+    profileName.textContent = data.name;
+    profileDescription.textContent = data.about;
+    changeAvatar(data.avatar);
+  });
+
+  Cards()
+    .then(data => {
+      data.slice().reverse().forEach(card => {
+        elements.prepend(createCard(card));
+      });
+    });
+
+    //card.link, card.name, card.likes, card.owner, card._id

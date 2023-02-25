@@ -35,7 +35,10 @@ const imgName = document.querySelector(".popup__img-text");
 const addFormAvatar = document.querySelector('.popup__form_type_profile-avatar');
 const linkAvatar = document.querySelector('.popup__field_type_link-avatar');
 
+const myId = "f78226b1cf21761c656586dd";
+
 export {
+  myId,
   linkAvatar,
   addFormAvatar,
   imgName,

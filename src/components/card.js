@@ -1,32 +1,70 @@
-import { imgName, popupImg, elements, popupsImg } from "./constants.js";
+import { imgName, popupImg, popupsImg, myId } from "./constants.js";
 
 import { openPopup } from "./modal.js";
 
+import { putLikeElement, deleteLikeElement, deleteCard } from "./API.js"
+
 // добавление карточек
 
-export function createCard(linkValue, titleValue) {
+//card.link, card.name, card.likes, card.owner, card._id
+
+export function createCard(card) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const openPopupImg = cardElement.querySelector(".element__img");
+  const likesCount = cardElement.querySelector('.element__likes');
 
-  cardElement.querySelector(".element__name").textContent = titleValue;
-  openPopupImg.style.backgroundImage = `url(${linkValue})`;
+  cardElement.querySelector(".element__name").textContent = card.name;
+  openPopupImg.style.backgroundImage = `url(${card.link})`;
+  likesCount.textContent = card.likes.length;
+
+  if(card.owner._id !== myId){
+    cardElement.removeChild(cardElement.querySelector('.element__trash'));
+  }else {
+    cardElement
+    .querySelector(".element__trash")
+    .addEventListener("click", (evt) => {
+      deleteCard(card._id)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    });
+  }
+  
+  card.likes.forEach(e => {
+    if(e._id === myId){
+      cardElement.querySelector(".element__button").classList.toggle("element__button_active");
+    }
+  });
 
   cardElement
     .querySelector(".element__button")
     .addEventListener("click", (evt) => {
-      evt.target.classList.toggle("element__button_active");
-    });
-  cardElement
-    .querySelector(".element__trash")
-    .addEventListener("click", (evt) => {
-      evt.target.closest(".element").remove();
+      if(evt.target.classList.contains('element__button_active')){
+        deleteLikeElement(card._id)
+          .then(() => {
+            evt.target.classList.toggle("element__button_active");
+            likesCount.textContent -= 1;
+          })
+      }else{
+        putLikeElement(card._id)
+          .then(() => {
+            evt.target.classList.toggle("element__button_active");
+            likesCount.textContent = parseInt(likesCount.textContent, 10) + 1;
+          })
+      }
+      
     });
 
+  
+
   openPopupImg.addEventListener("click", () => {
-    popupImg.src = linkValue;
-    popupImg.alt = titleValue;
-    imgName.textContent = titleValue;
+    popupImg.src = card.link;
+    popupImg.alt = card.name;
+    imgName.textContent = card.name;
     openPopup(popupsImg);
   });
 
@@ -34,38 +72,3 @@ export function createCard(linkValue, titleValue) {
 }
 
 // Карточки через массив
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-  {
-    name: "Джек Рассел",
-    link: "https://ferret-pet.ru/wp-content/uploads/5/d/8/5d89f4df1e931d002bd6be202220c93e.jpeg",
-  },
-];
-
-initialCards.forEach((element) => {
-  const cardElement = createCard(element.link, element.name);
-  elements.prepend(cardElement);
-});

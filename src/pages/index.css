@@ -19,6 +19,7 @@
 @import url(../blocks/popup/__field-error/popup__field-error.css);
 @import url(../blocks/popup/__field-error/_active/popup__field-error_active.css);
 @import url(../blocks/popup/__overlay/popup__overlay.css);
+@import url(../blocks/popup/_dark/popup_dark.css);
 
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_inactive/button_inactive.css);

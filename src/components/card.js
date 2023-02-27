@@ -1,8 +1,8 @@
-import { imgName, popupImg, popupsImg, myId } from "./constants.js";
+import { imgName, popupImg, popupsImg } from "./constants.js";
 
 import { openPopup } from "./modal.js";
 
-import { putLikeElement, deleteLikeElement, deleteCard } from "./API.js"
+import { putLikeElement, deleteLikeElement, deleteCard, userId } from "./API.js"
 
 // добавление карточек
 
@@ -18,7 +18,7 @@ export function createCard(card) {
   openPopupImg.style.backgroundImage = `url(${card.link})`;
   likesCount.textContent = card.likes.length;
 
-  if(card.owner._id !== myId){
+  if(card.owner._id !== userId){
     cardElement.removeChild(cardElement.querySelector('.element__trash'));
   }else {
     cardElement
@@ -35,7 +35,7 @@ export function createCard(card) {
   }
   
   card.likes.forEach(e => {
-    if(e._id === myId){
+    if(e._id === userId){
       cardElement.querySelector(".element__button").classList.toggle("element__button_active");
     }
   });
@@ -45,16 +45,18 @@ export function createCard(card) {
     .addEventListener("click", (evt) => {
       if(evt.target.classList.contains('element__button_active')){
         deleteLikeElement(card._id)
-          .then(() => {
+          .then((res) => {
             evt.target.classList.toggle("element__button_active");
-            likesCount.textContent -= 1;
+            likesCount.textContent = res.likes.length;
           })
+          .catch(e => console.log(e))
       }else{
         putLikeElement(card._id)
-          .then(() => {
+          .then((res) => {
             evt.target.classList.toggle("element__button_active");
-            likesCount.textContent = parseInt(likesCount.textContent, 10) + 1;
+            likesCount.textContent = res.likes.length;
           })
+          .catch(e => console.log(e))
       }
       
     });

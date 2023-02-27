@@ -1,7 +1,6 @@
 import "./pages/index.css";
 
 import {
-  profileButtonEdit,
   name,
   description,
   profileName,
@@ -12,7 +11,7 @@ import {
   imagePopup,
   popupEditClose,
   profileButton,
-  profileCloseButton,
+  buttonEditProfile,
   closePopupImg,
   imgButton,
   imgCloseButton,
@@ -21,9 +20,11 @@ import {
   link,
   title,
   profileForm,
-  addFormAvatar,
+  buttonOpenPopupAvatar,
   avatarPopup,
-  linkAvatar
+  linkAvatar,
+  buttonPopupSubmitAvatar,
+  buttonPopupSubmitProfile
 } from "./components/constants.js";
 
 import { closePopup, openPopup } from "./components/modal.js";
@@ -31,10 +32,10 @@ import { closePopup, openPopup } from "./components/modal.js";
 import { changeData, changeAvatar } from "./components/utils.js";
 import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
-import { userInfo, Cards, postCard, putLikeElement, deleteLikeElement } from "./components/API";
+import { getUser, getCards, postCard, putLikeElement, deleteLikeElement, setUserId } from "./components/API";
 
 // Модальные окна
-profileButtonEdit.addEventListener("click", () => {
+buttonEditProfile.addEventListener("click", () => {
   name.value = profileName.textContent;
   description.value = profileDescription.textContent;
   openPopup(profilePopup);
@@ -46,7 +47,7 @@ popupEditClose.addEventListener("click", () => {
 profileButton.addEventListener("click", () => {
   openPopup(cardPopup);
 });
-profileCloseButton.addEventListener("click", () => {
+buttonEditProfile.addEventListener("click", () => {
   closePopup(cardPopup);
 });
 
@@ -64,29 +65,35 @@ imgCloseButton.addEventListener("click", () => {
 // Карточки
 cardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  cardForm.querySelector('.popup__submit-button_type_profile').textContent = 'Сохранение...';
+  buttonPopupSubmitProfile.textContent = 'Сохранение...';
 
   postCard(title.value, link.value)
     .then((res) => {
       const card = createCard(res);
       elements.prepend(card); 
-      cardForm.querySelector('.popup__submit-button_type_profile').textContent = 'Сохранить';
       evt.target.reset();
       closePopup(cardPopup);
-  });
+  })
+    .catch(e => console.log(e))
+    .finally(() => {
+      buttonPopupSubmitProfile.textContent = 'Сохранить';
+    });
 });
 
 profileForm.addEventListener("submit", changeData);
 
 
-addFormAvatar.addEventListener('submit', (evt) => {
+buttonOpenPopupAvatar.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addFormAvatar.querySelector('.popup__submit-button_type_avatar').textContent = 'Сохранение...';
+  buttonPopupSubmitAvatar.textContent = 'Сохранение...';
   changeAvatar(linkAvatar.value)
     .then(() => {
-      addFormAvatar.querySelector('.popup__submit-button_type_avatar').textContent = 'Сохранить';
       evt.target.reset();
       closePopup(avatarPopup);
+    })
+    .catch(e => console.log(e))
+    .finally(() => {
+      buttonPopupSubmitAvatar.textContent = 'Сохранить';
     });
 
   
@@ -104,19 +111,15 @@ enableValidation({
 });
 
 //связь с сервером 
+Promise.all([getUser(), getCards()]).then((res) => {
 
-userInfo()
-  .then(data => {
-    profileName.textContent = data.name;
-    profileDescription.textContent = data.about;
-    changeAvatar(data.avatar);
-  });
+    profileName.textContent = res[0].name;
+    profileDescription.textContent = res[0].about;
+    setUserId(res[0]._id)
+    changeAvatar(res[0].avatar);
 
-  Cards()
-    .then(data => {
-      data.slice().reverse().forEach(card => {
-        elements.prepend(createCard(card));
-      });
-    });
+    res[1].slice().reverse().forEach(card => {
+      elements.prepend(createCard(card));
+    })
 
-    //card.link, card.name, card.likes, card.owner, card._id
+}).catch(e => console.log(e))

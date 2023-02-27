@@ -5,7 +5,7 @@ import {
   description,
   profilePopup,
   avatarPopup,
-  addFormAvatar,
+  buttonOpenPopupAvatar,
   linkAvatar
 } from "./constants.js";
 import { closePopup } from "./modal.js";
@@ -31,5 +31,6 @@ export const changeAvatar = (linkValue) => {
       const avatar = document.querySelector('.profile__img')
       avatar.style.backgroundImage = `url(${linkValue})`
     })
+    .catch(e => console.log(e))
 }
 

@@ -1,4 +1,4 @@
-const profileButtonEdit = document.querySelector(".profile__button-edit");
+const buttonEditProfile = document.querySelector(".profile__button-edit");
 const popupEditClose = document.querySelector(".popup__close-button_type_edit");
 const profileForm = document.querySelector(".popup__form_type_edit");
 
@@ -8,9 +8,12 @@ const avatarPopup = document.querySelector('.popup_type_icon');
 const imagePopup = document.querySelector(".popup_type_icon");
 
 const profileButton = document.querySelector(".profile__button");
-const profileCloseButton = document.querySelector(
+const buttonCloseProfile = document.querySelector(
   ".popup__close-button_type_button"
 );
+
+const buttonPopupSubmitProfile = document.querySelector('.popup__submit-button_type_profile');
+const buttonPopupSubmitAvatar = document.querySelector('.popup__submit-button_type_avatar');
 
 const closePopupImg = document.querySelector(".popup__close-button_type_img");
 const popupsImg = document.querySelector(".popup_type_img");
@@ -32,18 +35,18 @@ const elements = document.querySelector(".elements");
 const popupImg = document.querySelector(".popup__img");
 const imgName = document.querySelector(".popup__img-text");
 
-const addFormAvatar = document.querySelector('.popup__form_type_profile-avatar');
+const buttonOpenPopupAvatar = document.querySelector('.popup__form_type_profile-avatar');
 const linkAvatar = document.querySelector('.popup__field_type_link-avatar');
 
-const myId = "f78226b1cf21761c656586dd";
 
 export {
-  myId,
+  buttonPopupSubmitAvatar,
+  buttonPopupSubmitProfile,
   linkAvatar,
-  addFormAvatar,
+  buttonOpenPopupAvatar,
   imgName,
   popupImg,
-  profileButtonEdit,
+  buttonEditProfile,
   name,
   description,
   profileName,
@@ -54,7 +57,7 @@ export {
   imagePopup,
   popupEditClose,
   profileButton,
-  profileCloseButton,
+  buttonCloseProfile,
   closePopupImg,
   imgButton,
   imgCloseButton,

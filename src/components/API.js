@@ -15,13 +15,20 @@ const main = {
     Promise.reject(`Ошибка: ${res.status}`);
   }
  // Связь с серветом
-  export function userInfo() {
+  export function getUser() {
     return fetch('https://nomoreparties.co/v1/plus-cohort-21/users/me', {
         method: "GET",
         headers: main.headers,
       })
-        .then(res => checkError(res));
+        .then(res => checkError(res))
+        .catch(e => console.log(e));
   }
+  export let userId = '';
+
+  export const setUserId = (newId) => {
+    userId = newId;
+  }
+
  // Изменение информации и аватарки профеля
   export function postUserInfo(name, about) {
     return fetch('https://nomoreparties.co/v1/plus-cohort-21/users/me', {
@@ -35,7 +42,8 @@ const main = {
         about: about,
       }),
     })
-        .then((res) => checkError(res));
+        .then((res) => checkError(res))
+        .catch(e => console.log(e));
   }
 
   export function postUserAvatar(avatar) {
@@ -49,15 +57,17 @@ const main = {
         avatar: avatar
       }),
     })
-        .then((res) => checkError(res));
+        .then((res) => checkError(res))
+        .catch(e => console.log(e));
   }
     // Поулчение карточек с сервера 
-  export function Cards() {
+  export function getCards() {
     return fetch('https://nomoreparties.co/v1/plus-cohort-21/cards', {
         method: "GET",
         headers: main.headers,
       })
-        .then(res => checkError(res));
+        .then(res => checkError(res))
+        .catch(e => console.log(e));
   }
     // Отправка каточек на сервер
   export function postCard(name, link) {
@@ -72,7 +82,8 @@ const main = {
         link: link,
       }),
     })
-        .then((res) => checkError(res));
+        .then((res) => checkError(res))
+        .catch(e => console.log(e));
   }
  //Удаление кароточки
   export function deleteCard(cardID) {
@@ -83,7 +94,8 @@ const main = {
             'Content-Type': 'application/json'
     },
     })
-        .then((res) => checkError(res));
+        .then((res) => checkError(res))
+        .catch(e => console.log(e));
   }
 
   //Снятие и постановка лайка
@@ -92,12 +104,14 @@ const main = {
     return fetch(`https://nomoreparties.co/v1/plus-cohort-21/cards/likes/${cardID}`, {
       method: "PUT",
       headers: main.headers,
-    }).then((res) => checkError(res));
+    }).then((res) => checkError(res))
+      .catch(e => console.log(e));
   }
   
   export function deleteLikeElement(cardID) {
     return fetch(`https://nomoreparties.co/v1/plus-cohort-21/cards/likes/${cardID}`, {
       method: "DELETE",
       headers: main.headers,
-    }).then((res) => checkError(res));
+    }).then((res) => checkError(res))
+      .catch(e => console.log(e));
 }

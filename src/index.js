@@ -24,15 +24,19 @@ import {
   avatarPopup,
   linkAvatar,
   buttonPopupSubmitAvatar,
-  buttonPopupSubmitProfile
+  buttonPopupSubmitProfile,
+  imgName, 
+  popupImg,
+  buttonSubmitPopupEdit,
+  profileImg
 } from "./components/constants.js";
 
 import { closePopup, openPopup } from "./components/modal.js";
-
-import { changeData, changeAvatar } from "./components/utils.js";
 import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
-import { getUser, getCards, postCard, putLikeElement, deleteLikeElement, setUserId } from "./components/API";
+import { getUser, getCards, postCard, postUserAvatar } from "./components/API";
+
+let userId = '';
 
 // Модальные окна
 buttonEditProfile.addEventListener("click", () => {
@@ -69,7 +73,13 @@ cardForm.addEventListener("submit", function (evt) {
 
   postCard(title.value, link.value)
     .then((res) => {
-      const card = createCard(res);
+      console.log(res)
+      const card = createCard(res, userId, () => {
+        popupImg.src = card.link;
+        popupImg.alt = card.name;
+        imgName.textContent = card.name;
+        openPopup(popupsImg);
+      });
       elements.prepend(card); 
       evt.target.reset();
       closePopup(cardPopup);
@@ -115,11 +125,42 @@ Promise.all([getUser(), getCards()]).then((res) => {
 
     profileName.textContent = res[0].name;
     profileDescription.textContent = res[0].about;
-    setUserId(res[0]._id)
+    userId = res[0]._id;
     changeAvatar(res[0].avatar);
 
     res[1].slice().reverse().forEach(card => {
-      elements.prepend(createCard(card));
+      elements.prepend(createCard(card, userId, () => {
+        popupImg.src = card.link;
+        popupImg.alt = card.name;
+        imgName.textContent = card.name;
+        openPopup(popupsImg);
+      }));
     })
 
-}).catch(e => console.log(e))
+}).catch(e => console.log(e));
+
+
+function changeData(event) {
+  event.preventDefault();
+  buttonSubmitPopupEdit.textContent = 'Сохранение...';
+  postUserInfo(name.value, description.value)
+    .then(() => {
+      profileName.textContent = `${name.value}`;
+      profileDescription.textContent = `${description.value}`
+      closePopup(profilePopup);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      buttonSubmitPopupEdit.textContent = 'Сохранить';
+    });;
+}
+
+const changeAvatar = (linkValue) => {
+  return postUserAvatar(linkValue)
+    .then(() => {
+      const avatar = profileImg;
+      avatar.style.backgroundImage = `url(${linkValue})`
+    })
+    .catch(e => console.log(e))
+}
+

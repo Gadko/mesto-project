@@ -1,14 +1,14 @@
-import { imgName, popupImg, popupsImg } from "./constants.js";
+
 
 import { openPopup } from "./modal.js";
 
-import { putLikeElement, deleteLikeElement, deleteCard, userId } from "./API.js"
+import { putLikeElement, deleteLikeElement, deleteCard } from "./API.js"
 
 // добавление карточек
 
 //card.link, card.name, card.likes, card.owner, card._id
 
-export function createCard(card) {
+export function createCard(card, userId, popupHeandler) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const openPopupImg = cardElement.querySelector(".element__img");
@@ -63,12 +63,7 @@ export function createCard(card) {
 
   
 
-  openPopupImg.addEventListener("click", () => {
-    popupImg.src = card.link;
-    popupImg.alt = card.name;
-    imgName.textContent = card.name;
-    openPopup(popupsImg);
-  });
+  openPopupImg.addEventListener("click", popupHeandler);
 
   return cardElement;
 }

@@ -23,11 +23,6 @@ const main = {
         .then(res => checkError(res))
         .catch(e => console.log(e));
   }
-  export let userId = '';
-
-  export const setUserId = (newId) => {
-    userId = newId;
-  }
 
  // Изменение информации и аватарки профеля
   export function postUserInfo(name, about) {

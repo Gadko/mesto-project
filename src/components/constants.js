@@ -38,8 +38,15 @@ const imgName = document.querySelector(".popup__img-text");
 const buttonOpenPopupAvatar = document.querySelector('.popup__form_type_profile-avatar');
 const linkAvatar = document.querySelector('.popup__field_type_link-avatar');
 
+const buttonSubmitPopupEdit = document.querySelector('.popup__submit-button_type_edit');
+
+const profileImg = document.querySelector('.profile__img');
+
+
 
 export {
+  profileImg,
+  buttonSubmitPopupEdit,
   buttonPopupSubmitAvatar,
   buttonPopupSubmitProfile,
   linkAvatar,

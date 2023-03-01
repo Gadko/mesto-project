@@ -20,7 +20,7 @@ import {
   link,
   title,
   profileForm,
-  buttonOpenPopupAvatar,
+  formOpenPopupAvatar,
   avatarPopup,
   linkAvatar,
   buttonPopupSubmitAvatar,
@@ -34,7 +34,7 @@ import {
 import { closePopup, openPopup } from "./components/modal.js";
 import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
-import { getUser, getCards, postCard, postUserAvatar } from "./components/API";
+import { getUser, getCards, postCard, postUserAvatar, postUserInfo } from "./components/API";
 
 let userId = '';
 
@@ -93,11 +93,13 @@ cardForm.addEventListener("submit", function (evt) {
 profileForm.addEventListener("submit", changeData);
 
 
-buttonOpenPopupAvatar.addEventListener('submit', (evt) => {
+formOpenPopupAvatar.addEventListener('submit', (evt) => {
   evt.preventDefault();
   buttonPopupSubmitAvatar.textContent = 'Сохранение...';
-  changeAvatar(linkAvatar.value)
+  return postUserAvatar(linkAvatar.value)
     .then(() => {
+      const avatar = profileImg;
+      avatar.style.backgroundImage = `url(${linkAvatar.value})`;
       evt.target.reset();
       closePopup(avatarPopup);
     })

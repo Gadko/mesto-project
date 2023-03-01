@@ -35,7 +35,7 @@ const elements = document.querySelector(".elements");
 const popupImg = document.querySelector(".popup__img");
 const imgName = document.querySelector(".popup__img-text");
 
-const buttonOpenPopupAvatar = document.querySelector('.popup__form_type_profile-avatar');
+const formOpenPopupAvatar = document.querySelector('.popup__form_type_profile-avatar');
 const linkAvatar = document.querySelector('.popup__field_type_link-avatar');
 
 const buttonSubmitPopupEdit = document.querySelector('.popup__submit-button_type_edit');
@@ -50,7 +50,7 @@ export {
   buttonPopupSubmitAvatar,
   buttonPopupSubmitProfile,
   linkAvatar,
-  buttonOpenPopupAvatar,
+  formOpenPopupAvatar,
   imgName,
   popupImg,
   buttonEditProfile,

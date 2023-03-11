@@ -31,12 +31,26 @@ import {
   profileImg
 } from "./components/constants.js";
 
+import Api from './components/API.js'
+import Card from './components/card.js'
+
 import { closePopup, openPopup } from "./components/modal.js";
-import { createCard } from "./components/card.js";
+//import { createCard } from "./components/card.js";
 import { enableValidation } from "./components/validate.js";
-import { getUser, getCards, postCard, postUserAvatar, postUserInfo } from "./components/API";
+//import { getUser, getCards, postCard, postUserAvatar, postUserInfo } from "./components/API";
 
 let userId = '';
+
+
+const api = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
+  headers: {
+    authorization: '71950263-dc45-46b9-9239-c7d806444496',
+    'Content-Type': 'application/json'
+  }
+}); 
+
+
 
 // Модальные окна
 buttonEditProfile.addEventListener("click", () => {
@@ -71,7 +85,7 @@ cardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
   buttonPopupSubmitProfile.textContent = 'Сохранение...';
 
-  postCard(title.value, link.value)
+  api.postCard(title.value, link.value)
     .then((res) => {
       console.log(res)
       const card = createCard(res, userId, () => {
@@ -96,7 +110,7 @@ profileForm.addEventListener("submit", changeData);
 formOpenPopupAvatar.addEventListener('submit', (evt) => {
   evt.preventDefault();
   buttonPopupSubmitAvatar.textContent = 'Сохранение...';
-  return postUserAvatar(linkAvatar.value)
+  return api.postUserAvatar(linkAvatar.value)
     .then(() => {
       const avatar = profileImg;
       avatar.style.backgroundImage = `url(${linkAvatar.value})`;
@@ -122,8 +136,10 @@ enableValidation({
   errorClass: "popup__field-error_active",
 });
 
+
+
 //связь с сервером 
-Promise.all([getUser(), getCards()]).then((res) => {
+Promise.all([api.getUser(), api.getCards()]).then((res) => {
 
     profileName.textContent = res[0].name;
     profileDescription.textContent = res[0].about;
@@ -145,7 +161,7 @@ Promise.all([getUser(), getCards()]).then((res) => {
 function changeData(event) {
   event.preventDefault();
   buttonSubmitPopupEdit.textContent = 'Сохранение...';
-  postUserInfo(name.value, description.value)
+  api.postUserInfo(name.value, description.value)
     .then(() => {
       profileName.textContent = `${name.value}`;
       profileDescription.textContent = `${description.value}`
@@ -158,7 +174,7 @@ function changeData(event) {
 }
 
 const changeAvatar = (linkValue) => {
-  return postUserAvatar(linkValue)
+  return api.postUserAvatar(linkValue)
     .then(() => {
       const avatar = profileImg;
       avatar.style.backgroundImage = `url(${linkValue})`

@@ -1,110 +1,120 @@
 
 
-import { openPopup } from "./modal.js";
-
-import Api from './API.js'
+import { openPopup, closePopup } from "./modal.js";
+import {api} from '../index';
+import {imagePopup, imgName, popupImg} from "./constants";
 //import { putLikeElement, deleteLikeElement, deleteCard } from "./API.js"
 
-const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
-  headers: {
-    authorization: '71950263-dc45-46b9-9239-c7d806444496',
-    'Content-Type': 'application/json'
-  }
-}); 
 
 // добавление карточек
 
 //card.link, card.name, card.likes, card.owner, card._id
 
 export default class Card {
-  constructor(data, userId, popupHeandler){
+  constructor(data, userId, selector){
     this._data = data;
-    this._popupHeandler = popupHeandler;
+    this._likes = data.likes;
+    this._link = data.link;
+    this._name = data.name;
+    // this._popupHeandler = popupHeandler;
+    this._selector = selector;
     this._userId = userId;
+    this._element = this._getElement();
+    this._cardImage =  this._element.querySelector(".element__img");
+    this._cardName = this._element.querySelector(".element__name");
+    this._likeCount = this._element.querySelector(".element__likes");
+    this._likeButton = this._element.querySelector(".element__button");
   }
 
   _getElement() {
-    const cardTemplate = document.querySelector("#card-template").content;
-    const cardElement = cardTemplate
-    .querySelector('.element')
-    .cloneNode(true);
-
-    return cardElement;
+    return document
+        .querySelector(this._selector)
+        .content
+        .querySelector('.element')
+        .cloneNode(true);
+  }
+  _handleOpenPopup() {
+    popupImg.src = this._cardImage;
+    popupImg.alt = this._cardName;
+    imgName.textContent = this._cardName;
+    openPopup(imagePopup)
   }
 
-  openImg() {
-    const element = this._getElement();
-
-    element.querySelector('.element__img').addEventListener("click", popupHeandler);
+  _handleClosePopup() {
+    popupImg.src = ' ';
+    popupImg.alt = ' ';
+    imgName.textContent = ' ';
+    closePopup(imagePopup);
   }
 
+
+  // openImg() {
+  //   const element = this._getElement();
+  //
+  //   element.querySelector('.element__img').addEventListener("click", popupHeandler);
+  // }
+  //
   checkLikes() {
-    const element = this._getElement();
-
-    this._data.likes.forEach(e => {
-      if(e._id === this._userId){
-        element.querySelector(".element__button").classList.toggle("element__button_active");
+    this._likeCount.textContent = this._likes.length;
+      if(this._likes.some(el => el._id === this._userId)){
+        this._likeButton.classList.toggle("element__button_active");
       }
-    });
-    return element
   }
 
   changeLikes() {
-    const element = this._getElement();
-
-    element
-    .querySelector(".element__button")
+    this._likeCount.textContent = this._likes.length;
+    if(this._likes.some(el => el._id === this._userId)){
+      this._likeButton.classList.toggle("element__button_active");
+    }
+    this._likeButton
     .addEventListener("click", (evt) => {
       if(evt.target.classList.contains('element__button_active')){
         api.deleteLikeElement(this._data._id)
           .then((res) => {
             evt.target.classList.toggle("element__button_active");
-            element.querySelector('.element__likes').textContent = res.likes.length;
+            this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))
       }else{
         api.putLikeElement(this._data._id)
           .then((res) => {
             evt.target.classList.toggle("element__button_active");
-            element.querySelector('.element__likes').textContent = res.likes.length;
+            this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))
       }
-      
+
     });
-    return element;
+    return this._likeButton;
   }
 
   deleteCard() {
-    const element = this._getElement();
-    
+
     if(this._data.owner._id !== this._userId){
-      element.removeChild(element.querySelector('.element__trash'));
-    }else {
-      element
+      this._element.removeChild(this._element.querySelector('.element__trash'));
+    } else {
+      this._element
       .querySelector(".element__trash")
       .addEventListener("click", (evt) => {
         api.deleteCard(this._data._id)
         .then(() => {
-          element.remove();
+          this._element.remove();
         })
         .catch((err) => {
           console.log(err);
         });
       });
     }
-    return element;
+    return this._element;
   }
 
   generate() {
-    const element = this._getElement();
-
-    element.querySelector(".element__name").textContent = this._data.name;
-    element.querySelector('.element__img').style.backgroundImage = `url(${this._data.link})`;
-    element.querySelector('.element__likes').textContent = this._data.likes.length;
-
-    return _element;
+    this._cardName.textContent = this._name;
+    this._cardImage.style.backgroundImage = `url(${this._link})`;
+    this.checkLikes();
+    this.changeLikes();
+    this.deleteCard();
+    return this._element;
   }
 
 }

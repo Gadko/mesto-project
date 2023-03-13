@@ -1,22 +1,23 @@
-import Card from './components/card.js';
-
 export default class Section {
-    constructor({data, userId, popupHeandler}, element){
-        this._renderItems = {data, userId, popupHeandler};
-        this._element = element
+    constructor({ data, renderer }, containerSelector) {
+        this._renderedItems = data;
+        this._renderer = renderer;
+        this._container = document.querySelector(containerSelector);
     }
 
-    setElement(e){
-        this._element.prepend(e);
+    setItem(element) {
+        this._container.append(element);
     }
 
-    renderItem() {
-        this._renderItems.forEach(e => {
-            const card = new Card(e);
+    clear() {
+        this._container.innerHTML = '';
+    }
 
-            const cardElement = card.generate();
+    renderItems() {
+        this.clear();
 
-            this.setElement(cardElement);
+        this._renderedItems.forEach(item => {
+            this._renderer(item);
         });
     }
 }

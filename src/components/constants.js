@@ -42,6 +42,10 @@ const buttonSubmitPopupEdit = document.querySelector('.popup__submit-button_type
 
 const profileImg = document.querySelector('.profile__img');
 
+const cardsContainerSelector = '.elements';
+const profileNameSelector = '.profile__name';
+const profileDescriptionSelector = '.profile__description';
+
 
 
 export {
@@ -73,5 +77,8 @@ export {
   link,
   cardForm,
   elements,
-  avatarPopup
+  avatarPopup,
+  cardsContainerSelector,
+  profileNameSelector,
+  profileDescriptionSelector
 };

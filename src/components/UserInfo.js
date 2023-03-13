@@ -3,9 +3,10 @@ import {closePopup} from "./modal";
 import {api} from "../index";
 
 export default class UserInfo {
-    constructor({ profileName, profileDescription }){
+    constructor({ profileName, profileDescription, profileAvatar }){
         this._profileName = document.querySelector(profileName);
         this._profileAbout = document.querySelector(profileDescription);
+        this._profileAvatar = document.querySelector(profileAvatar);
     }
     getUser(){
         return {
@@ -26,8 +27,9 @@ export default class UserInfo {
             //     buttonSubmitPopupEdit.textContent = 'Сохранить';
             // });
     }
-    setUserInfo({name,about}){
+    setUserInfo({name,about,avatar}){
         this._profileName.textContent = name;
         this._profileAbout.textContent = about;
+        this._profileAvatar.style.backgroundImage = `url(${avatar})`;
     }
 }

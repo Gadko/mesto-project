@@ -1,7 +1,7 @@
 
 
 import { openPopup, closePopup } from "./modal.js";
-import {api, myId} from '../index';
+import {api} from '../index';
 import {imagePopup, imgName, popupImg, popupsImg} from "./constants";
 //import { putLikeElement, deleteLikeElement, deleteCard } from "./API.js"
 
@@ -61,24 +61,19 @@ export default class Card {
   }
 
   changeLikes() {
-    this._likeCount.textContent = this._likes.length;
-    
-    if(this._likes.some(el => el._id === this._userId)){
-      this._likeButton.classList.toggle("element__button_active");
-    }
     this._likeButton
     .addEventListener("click", (evt) => {
       if(evt.target.classList.contains('element__button_active')){
         api.deleteLikeElement(this._data._id)
           .then((res) => {
-            evt.target.classList.toggle("element__button_active");
+            evt.target.classList.remove("element__button_active");
             this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))
       }else{
         api.putLikeElement(this._data._id)
           .then((res) => {
-            evt.target.classList.toggle("element__button_active");
+            evt.target.classList.add("element__button_active");
             this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))
@@ -89,8 +84,7 @@ export default class Card {
   }
 
   deleteCard() {
-
-    if(this._data.owner._id !== myId){
+    if(this._data.owner._id !== this._userId){
       this._element.removeChild(this._element.querySelector('.element__trash'));
     } else {
       this._element

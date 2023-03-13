@@ -32,6 +32,7 @@ import {
     cardsContainerSelector,
     profileNameSelector,
     profileDescriptionSelector,
+    profileLinkAvatarSelector
 } from "./components/constants.js";
 
 import Api from './components/API.js'
@@ -44,7 +45,6 @@ import { closePopup, openPopup } from "./components/modal.js";
 //import { getUser, getCards, postCard, postUserAvatar, postUserInfo } from "./components/API";
 import UserInfo from "./components/UserInfo";
 
-export let myId = '';
 
 const dataInfo = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
@@ -129,46 +129,38 @@ cardForm.addEventListener("submit", function (evt) {
 //
 //
 // })
-
+ const selectors = {
+     formSelector: ".popup__form",
+     inputSelector: ".popup__field",
+     submitButtonSelector: ".popup__submit-button",
+     inactiveButtonClass: "button_inactive",
+     inputErrorClass: "popup__field_type_error",
+     errorClass: "popup__field-error_active",
+ }
 
 // валидация
-// enableValidation({
-//   formSelector: ".popup__form",
-//   inputSelector: ".popup__field",
-//   submitButtonSelector: ".popup__submit-button",
-//   inactiveButtonClass: "button_inactive",
-//   inputErrorClass: "popup__field_type_error",
-//   errorClass: "popup__field-error_active",
-// });
+// enableValidation({selectors});
 
-const createCard = (cardData) => {
-    const card = new Card(cardData, cardData.owner._id, '#card-template');
+const createCard = (cardData,userId ) => {
+    const card = new Card(cardData, userId , '#card-template');
     return card.generate();
 };
 
 //связь с сервером 
 Promise.all([api.getUser(), api.getCards()]).then(data => {
     const [profileInfo, cardsInfo] = data;
-    // profileName.textContent = res[0].name;
-    // profileDescription.textContent = res[0].about;
-    myId = data[0]._id
-    // changeAvatar(res[0].avatar);
-    //
-    // res[1].slice().reverse().forEach(card => {
-    //   elements.prepend(createCard(card, userId, () => {
-    //   }));
-    // })
-    console.log(profileNameSelector)
+    const userId = profileInfo._id;
     const userInfoData = new UserInfo({
         profileName: profileNameSelector,
-        profileDescription: profileDescriptionSelector
+        profileDescription: profileDescriptionSelector,
+        profileAvatar: profileLinkAvatarSelector
     });
     userInfoData.setUserInfo(profileInfo);
 
     const cardsList = new Section({
             data: cardsInfo,
             renderer: (item) => {
-                const cardElement = createCard(item);
+                const cardElement = createCard(item,userId);
                 cardsList.setItem(cardElement);
             }
         },

@@ -46,6 +46,8 @@ const cardsContainerSelector = '.elements';
 const profileNameSelector = '.profile__name';
 const profileDescriptionSelector = '.profile__description';
 
+const profileLinkAvatarSelector = '.profile__img';
+
 
 
 export {
@@ -80,5 +82,6 @@ export {
   avatarPopup,
   cardsContainerSelector,
   profileNameSelector,
-  profileDescriptionSelector
+  profileDescriptionSelector,
+  profileLinkAvatarSelector
 };

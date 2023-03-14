@@ -2,33 +2,35 @@ export default class FormValidator {
   constructor(selector, formElement){
     this._selector = selector;
     this._formElement = formElement;
-    this._inputList = Array.from(document.querySelectorAll(selector.formSelector));
-    this._buttonEl = this._formElement.querySelector(this._selector.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(selector.inputSelector));
+    this._buttonEl = this._formElement.querySelector(selector.submitButtonSelector);
   }
 
   // // Валидация форм
 
   //Красные поля
+
   _showFieldError (inputEl, errorMessage) {
-    const errorElement = this._formElement.querySelector(`.${inputEl.id}-error`);
     inputEl.classList.add(this._selector.inputErrorClass);
+    const errorElement = this._formElement.querySelector(`.${inputEl.id}-error`);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._selector.errorClass);
   };
   _hideInputError(input) {
+    input.classList.remove(this._selector.inputErrorClass);
     const errorElement = this._formElement.querySelector(`.${input.id}-error`);
     errorElement.textContent = '';
-    input.classList.remove(this._selector.inputInvalidClass);
+    errorElement.classList.remove(this._selector.errorClass);
   }
 
-  hasInvalidInput () {
+  _hasInvalidInput () {
     return this._inputList.some((inputEl) => {
       return !inputEl.validity.valid;
     })
   }
 
 toggleButtonState () {
-  if (this.hasInvalidInput) {
+  if (this._hasInvalidInput()) {
     this._buttonEl.classList.add(this._selector.inactiveButtonClass);
     this._buttonEl.disabled = true;
   } else {
@@ -56,13 +58,12 @@ _isValid (inputElement) {
   setEventListeners ( ) {
     this.toggleButtonState();
     this._formElement.addEventListener("reset", () => {
-    setTimeout(() => {
-      this.toggleButtonState();
-    }, 0);
-  });
-
+      setTimeout(() => {
+        this.toggleButtonState();
+      }, 0);
+    });
     this._inputList.forEach((inputEl) => {
-    inputEl.addEventListener("input", (e) => {
+    inputEl.addEventListener("input", () => {
       this._isValid(inputEl);
       this.toggleButtonState();
     });
@@ -71,6 +72,7 @@ _isValid (inputElement) {
 
   enableValidation () {
     this.setEventListeners();
+    console.log(this._selector.inputErrorClass)
 };
 
 }

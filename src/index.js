@@ -8,7 +8,6 @@ import {
   profilePopup,
   cardPopup,
   popupsImg,
-  imagePopup,
   popupEditClose,
   profileButton,
   buttonEditProfile,
@@ -19,42 +18,31 @@ import {
   elements,
   link,
   title,
-  profileForm,
-  formOpenPopupAvatar,
   avatarPopup,
-  linkAvatar,
-  buttonPopupSubmitAvatar,
   buttonPopupSubmitProfile,
   imgName, 
   popupImg,
-  buttonSubmitPopupEdit,
   profileImg,
   cardsContainerSelector,
   profileNameSelector,
   profileDescriptionSelector,
   profileLinkAvatarSelector,
-  nameInput, 
-  aboutInput
+    profilePopupForm,
+    cardPopupForm,
+    avatarPopupForm,
+    selectors,
+    dataInfo
 } from "./components/constants.js";
 
 import Api from './components/API.js'
 import Card from './components/card.js'
 import Section from './components/section'
+import FormValidator from './components/validate'
 
 import { closePopup, openPopup } from "./components/modal.js";
-//import { createCard } from "./components/card.js";
-//import { enableValidation } from "./components/validate.js";
-//import { getUser, getCards, postCard, postUserAvatar, postUserInfo } from "./components/API";
 import UserInfo from "./components/UserInfo";
 
 
-const dataInfo = {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
-    headers: {
-        authorization: '71950263-dc45-46b9-9239-c7d806444496',
-        'Content-Type': 'application/json'
-    }
-}
 export const api = new Api(dataInfo);
 
 
@@ -81,10 +69,10 @@ closePopupImg.addEventListener("click", () => {
 });
 
 imgButton.addEventListener("click", () => {
-  openPopup(imagePopup);
+  openPopup(avatarPopup);
 });
 imgCloseButton.addEventListener("click", () => {
-  closePopup(imagePopup);
+  closePopup(avatarPopup);
 });
 
 // Карточки
@@ -131,17 +119,10 @@ cardForm.addEventListener("submit", function (evt) {
 //
 //
 // })
- const selectors = {
-     formSelector: ".popup__form",
-     inputSelector: ".popup__field",
-     submitButtonSelector: ".popup__submit-button",
-     inactiveButtonClass: "button_inactive",
-     inputErrorClass: "popup__field_type_error",
-     errorClass: "popup__field-error_active",
- }
 
-// валидация
-// enableValidation({selectors});
+
+
+
 
 const createCard = (cardData,userId ) => {
     const card = new Card(cardData, userId , '#card-template');
@@ -157,9 +138,10 @@ Promise.all([api.getUser(), api.getCards()]).then(data => {
         profileDescription: profileDescriptionSelector,
         profileAvatar: profileLinkAvatarSelector
     });
+    console.log(userId)
     userInfoData.setUserInfo(profileInfo);
-    const userData = userInfoData.getUser();
-    userInfoData.saveUserInfo(userData, name, description);
+    // const userData = userInfoData.getUser();
+    // userInfoData.saveUserInfo(userData, name, description);
 
     const cardsList = new Section({
             data: cardsInfo,
@@ -178,12 +160,23 @@ Promise.all([api.getUser(), api.getCards()]).then(data => {
 
 
 
-const changeAvatar = (linkValue) => {
-  return api.postUserAvatar(linkValue)
-    .then(() => {
-      const avatar = profileImg;
-      avatar.style.backgroundImage = `url(${linkValue})`
-    })
-    .catch(e => console.log(e))
-}
+// const changeAvatar = (linkValue) => {
+//   return api.postUserAvatar(linkValue)
+//     .then(() => {
+//       const avatar = profileImg;
+//       avatar.style.backgroundImage = `url(${linkValue})`
+//     })
+//     .catch(e => console.log(e))
+// }
+
+
+// валидация
+
+const profileFormValidator = new FormValidator(selectors,profilePopupForm);
+const cardFormValidator = new FormValidator(selectors,cardPopupForm);
+const avatarFormValidator = new FormValidator(selectors,avatarPopupForm);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 

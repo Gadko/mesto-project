@@ -1,3 +1,18 @@
+const dataInfo = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
+  headers: {
+    authorization: '71950263-dc45-46b9-9239-c7d806444496',
+    'Content-Type': 'application/json'
+  }
+}
+const selectors = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__field",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "button_inactive",
+  inputErrorClass: "popup__field_type_error",
+  errorClass: "popup__field-error_active",
+}
 const buttonEditProfile = document.querySelector(".profile__button-edit");
 const popupEditClose = document.querySelector(".popup__close-button_type_edit");
 const profileForm = document.querySelector(".popup__form_type_edit");
@@ -5,7 +20,7 @@ const profileForm = document.querySelector(".popup__form_type_edit");
 const profilePopup = document.querySelector(".popup_type_edit");
 const cardPopup = document.querySelector(".popup_type_profile");
 const avatarPopup = document.querySelector('.popup_type_icon');
-const imagePopup = document.querySelector(".popup_type_icon");
+
 
 const profileButton = document.querySelector(".profile__button");
 const buttonCloseProfile = document.querySelector(
@@ -48,6 +63,9 @@ const profileDescriptionSelector = '.profile__description';
 
 const profileLinkAvatarSelector = '.profile__img';
 
+const profilePopupForm = profilePopup.querySelector(selectors.formSelector);
+const cardPopupForm = cardPopup.querySelector(selectors.formSelector);
+const avatarPopupForm = avatarPopup.querySelector(selectors.formSelector);
 
 
 
@@ -68,7 +86,6 @@ export {
   profilePopup,
   cardPopup,
   popupsImg,
-  imagePopup,
   popupEditClose,
   profileButton,
   buttonCloseProfile,
@@ -84,5 +101,10 @@ export {
   cardsContainerSelector,
   profileNameSelector,
   profileDescriptionSelector,
-  profileLinkAvatarSelector
+  profileLinkAvatarSelector,
+  profilePopupForm,
+  cardPopupForm,
+  avatarPopupForm,
+    selectors,
+  dataInfo
 };

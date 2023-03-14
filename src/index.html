@@ -188,9 +188,9 @@
     </div>
     <!--Модальное окно изменения аватарки-->
     <div 
-      id="popup-profile"
+      id="popup-profile-avatar"
       class="popup popup_type_icon"
-      data-for-popup-target = "popup-profile">
+      data-for-popup-target = "popup-profile-avatar">
       <div class="popup__overlay">
         <div class="popup__container">
           <button
@@ -205,11 +205,11 @@
             method="get"
           >
             <input
-              type="link"
-              name="link"
+              type="url"
+              name="link-avatar"
               placeholder="Ссылка на картинку"
               value=""
-              class="popup__field popup__field_type_link-avatar"
+              class="popup__field popup__field_type_link"
               id="popup__field-icon"
               required
             />

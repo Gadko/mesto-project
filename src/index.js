@@ -29,10 +29,12 @@ import {
   popupImg,
   buttonSubmitPopupEdit,
   profileImg,
-    cardsContainerSelector,
-    profileNameSelector,
-    profileDescriptionSelector,
-    profileLinkAvatarSelector
+  cardsContainerSelector,
+  profileNameSelector,
+  profileDescriptionSelector,
+  profileLinkAvatarSelector,
+  nameInput, 
+  aboutInput
 } from "./components/constants.js";
 
 import Api from './components/API.js'
@@ -156,6 +158,8 @@ Promise.all([api.getUser(), api.getCards()]).then(data => {
         profileAvatar: profileLinkAvatarSelector
     });
     userInfoData.setUserInfo(profileInfo);
+    const userData = userInfoData.getUser();
+    userInfoData.saveUserInfo(userData, name, description);
 
     const cardsList = new Section({
             data: cardsInfo,

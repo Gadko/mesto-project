@@ -66,14 +66,14 @@ export default class Card {
       if(evt.target.classList.contains('element__button_active')){
         api.deleteLikeElement(this._data._id)
           .then((res) => {
-            evt.target.classList.remove("element__button_active");
+            evt.target.classList.toggle("element__button_active");
             this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))
       }else{
         api.putLikeElement(this._data._id)
           .then((res) => {
-            evt.target.classList.add("element__button_active");
+            evt.target.classList.toggle("element__button_active");
             this._likeCount.textContent = res.likes.length;
           })
           .catch(e => console.log(e))

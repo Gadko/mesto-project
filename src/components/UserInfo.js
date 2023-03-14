@@ -27,6 +27,12 @@ export default class UserInfo {
             //     buttonSubmitPopupEdit.textContent = 'Сохранить';
             // });
     }
+
+    saveUserInfo(data, nameInput, aboutInput) {
+        nameInput.value = data.name;
+        aboutInput.value = data.about;
+      }
+
     setUserInfo({name,about,avatar}){
         this._profileName.textContent = name;
         this._profileAbout.textContent = about;

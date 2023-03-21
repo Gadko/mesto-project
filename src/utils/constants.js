@@ -41,6 +41,7 @@ const titleCardPopup  = cardPopup.querySelector(".popup__field_type_title");
 const linkAvatarPopup  = avatarPopup.querySelector(".popup__field_type_link");
 const imgButton = document.querySelector(".profile__img-container");
 
+
 export {
   buttonEditProfile,
   nameProfilePopup,

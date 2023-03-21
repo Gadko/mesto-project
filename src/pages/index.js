@@ -44,14 +44,8 @@ const handleCardClick = (data) => {
 }
 
 // удаление карточки
-const handleDeleteCard = (cardElement,cardId) => {
-      api.deleteCard(cardId)
-      .then(() => {
-        cardElement.remove();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+const handleDeleteCard = (cardId) => {
+      return api.deleteCard(cardId)
 }
 // изменение иконки лайка
 const handleLikeClick = (card,cardId) => {
@@ -94,10 +88,10 @@ const userInfoData = new UserInfo({
 
 // редактирование профиля
 
-const popupChangeProfile = new PopupWithForm(selectorProfilePopup, () => {
+const popupChangeProfile = new PopupWithForm(selectorProfilePopup, (fields) => {
      popupChangeProfile.renderLoading(true);
             api
-                .postUserInfo(nameProfilePopup.value, descriptionProfilePopup.value)
+                .postUserInfo(fields.login, fields.description)
                 .then((data) => {
                     userInfoData.setUserInfo(data);
                     popupChangeProfile.close();
@@ -118,10 +112,10 @@ buttonEditProfile.addEventListener("click", () => {
 
 // редактирование аватара
 
-const popupChangeAvatar = new PopupWithForm(selectorAvatarPopup, () => {
+const popupChangeAvatar = new PopupWithForm(selectorAvatarPopup, (fields) => {
     popupChangeAvatar.renderLoading(true);
         api
-            .postUserAvatar(linkAvatarPopup.value)
+            .postUserAvatar(fields[`link-avatar`])
             .then((data) => {
                 userInfoData.setUserInfo(data);
                 popupChangeAvatar.close();
@@ -140,10 +134,10 @@ imgButton.addEventListener("click", () => {
 
 // создание новых карточек
 
-const popupCreateCard = new PopupWithForm(selectorCardPopup, () =>{
+const popupCreateCard = new PopupWithForm(selectorCardPopup, (fields) =>{
     popupCreateCard.renderLoading(true);
     api
-        .postCard(titleCardPopup.value, linkCardPopup.value)
+        .postCard(fields.login, fields.link)
         .then((data) => {
             cardsList.renderItem(data);
             popupCreateCard.close();

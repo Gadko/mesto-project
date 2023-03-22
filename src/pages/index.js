@@ -44,8 +44,14 @@ const handleCardClick = (data) => {
 }
 
 // удаление карточки
-const handleDeleteCard = (cardId) => {
-      return api.deleteCard(cardId)
+const handleDeleteCard = (cardElement,cardId) => {
+    api.deleteCard(cardId)
+    .then(() => {
+      cardElement.removeCard();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 // изменение иконки лайка
 const handleLikeClick = (card,cardId) => {

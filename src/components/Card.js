@@ -22,15 +22,10 @@ export default class Card {
         .cloneNode(true);
   }
 
-  _deleteCard() {
-    this._handleDeleteCard(this._data._id)
-    .then(() => {
-      this._element.remove();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
+  removeCard(){
+    this._element.remove();
+  }
+
 // слушатели событий
   _setEventListeners() {
     this._cardImage.addEventListener('click', () => {
@@ -38,7 +33,7 @@ export default class Card {
     })
 
     this._buttonDelete.addEventListener("click", () => {
-          this._deleteCard();
+          this._handleDeleteCard(this, this._data._id);
         })
     this._likeButton
         .addEventListener("click", () => {
